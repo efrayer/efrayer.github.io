@@ -1,6 +1,6 @@
-Wren - Perosonal Blog Website
+Eric - Personal Blog Website
 
-This is a blog html template made by codewithsadee
+This is a blog html 
 
 
 
@@ -45,7 +45,7 @@ aria-label = open menu
 
 Hello Everyone!
 
-I’m Wren Clark
+I’m Eric Frayer
 
 I use animation as a third dimension by which to simplify experiences and kuiding thro each and every interaction. I’m not adding motion just to spruce things up, but doing it in ways that.
 
