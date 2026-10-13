@@ -1,1451 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- 
-    - primary meta tags
-  -->
-  <title>Eric's - GitHub Blog Website</title>
-  <meta name="title" content="Eric - GitHub Blog Website">
-  <meta name="description" content="This is a blog html site">
-
-  <!-- 
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./favicon.ico" type="image/svg+xml">
-
-  <!-- 
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
-
-  <!-- 
-    - custom css link
-  -->
-  <link rel="stylesheet" href="./assets/css/style.css">
-
-  <!-- 
-    - preload images
-  -->
-  <link rel="preload" as="image" href="./assets/images/hero-banner.png">
-  <link rel="preload" as="image" href="./assets/images/pattern-2.svg">
-  <link rel="preload" as="image" href="./assets/images/pattern-3.svg">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric Frayer | Business Intelligence, Data &amp; AI</title>
+    <meta name="description" content="Eric Frayer - Business Intelligence, Data and Analytics projects and resources.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230284c7'/%3E%3Ctext x='16' y='22' font-family='Arial' font-weight='700' font-size='15' fill='white' text-anchor='middle'%3EEF%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- ponytail: styles mirror thinkdashboards.com so the three sites read as one family -->
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{--sky-50:#f0f9ff;--sky-100:#e0f2fe;--sky-200:#bae6fd;--sky-400:#38bdf8;--sky-600:#0284c7;--sky-700:#0369a1;--sky-900:#0c4a6e;--sl50:#f8fafc;--sl200:#e2e8f0;--sl300:#cbd5e1;--sl500:#64748b;--sl600:#475569;--sl700:#334155;--sl800:#1e293b;--sl900:#0f172a;--w:#fff}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--sl700);line-height:1.6;background:var(--w)}
+        a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+        .container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+        nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--sl200);transition:box-shadow .3s ease}
+        nav.scrolled{box-shadow:0 1px 8px rgba(0,0,0,.08)}
+        .nav-inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+        .nav-brand{font-weight:700;font-size:1.125rem;color:var(--sky-700);letter-spacing:-.02em}
+        .nav-links{display:flex;gap:2rem;list-style:none}
+        .nav-links a{font-size:.875rem;font-weight:500;color:var(--sl600);transition:color .2s}
+        .nav-links a:hover{color:var(--sky-600)}
+        .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
+        .nav-toggle span{display:block;width:22px;height:2px;background:var(--sl700);margin:5px 0;border-radius:2px}
+        .hero{padding:8rem 0 4rem;background:linear-gradient(135deg,var(--sky-50) 0%,var(--w) 50%,var(--sky-50) 100%);text-align:center}
+        .hero h1{font-size:2.75rem;font-weight:700;color:var(--sl900);letter-spacing:-.03em;line-height:1.2;margin-bottom:1rem}
+        .hero h1.typed{color:var(--sky-600);min-height:1.2em}
+        .hero p{font-size:1.125rem;color:var(--sl500);max-width:600px;margin:0 auto 2.5rem}
+        .hero-links{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center}
+        .btn{display:inline-block;padding:.65rem 1.5rem;border-radius:8px;font-size:.875rem;font-weight:500;transition:all .2s}
+        .btn-primary{background:var(--sky-600);color:var(--w)}
+        .btn-primary:hover{background:var(--sky-700);transform:translateY(-1px);box-shadow:0 4px 12px rgba(2,132,199,.25)}
+        .btn-outline{border:1px solid var(--sl300);color:var(--sl600);background:var(--w)}
+        .btn-outline:hover{border-color:var(--sky-400);color:var(--sky-600);background:var(--sky-50)}
+        section{padding:5rem 0}
+        .section-header{text-align:center;margin-bottom:3rem}
+        .section-header h2{font-size:2rem;font-weight:700;color:var(--sl900);letter-spacing:-.02em;margin-bottom:.5rem}
+        .section-header p{color:var(--sl500);font-size:1rem}
+        .about-grid{display:grid;grid-template-columns:200px 1fr;gap:3rem;align-items:start}
+        .about-photo{width:200px;height:200px;border-radius:50%;object-fit:cover;object-position:center top;border:3px solid var(--sky-200);background:#fff}
+        .about-text h3{font-size:1.25rem;font-weight:600;color:var(--sl800);margin-bottom:1rem}
+        .about-text p{margin-bottom:1rem;color:var(--sl600)}
+        .about-text a{color:var(--sky-600);font-weight:500}
+        .about-text a:hover{text-decoration:underline}
+        #projects{background:var(--sl50)}
+        .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+        .card{background:var(--w);border:1px solid var(--sl200);border-radius:12px;padding:2rem;transition:transform .2s,box-shadow .2s}
+        .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+        .card-icon{width:48px;height:48px;background:var(--sky-100);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem}
+        .card-icon svg{width:24px;height:24px;color:var(--sky-600)}
+        .card h3{font-size:1.1rem;font-weight:600;color:var(--sl800);margin-bottom:.5rem}
+        .card p{font-size:.925rem;color:var(--sl500);line-height:1.6}
+        .card .card-link{display:inline-block;margin-top:1rem;font-size:.875rem;font-weight:500;color:var(--sky-600)}
+        .card .card-link:hover{text-decoration:underline}
+        .chips{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;max-width:800px;margin:0 auto}
+        .chip{padding:.5rem 1.1rem;border-radius:999px;background:var(--sky-50);border:1px solid var(--sky-200);color:var(--sky-700);font-size:.875rem;font-weight:500}
+        .cta{background:linear-gradient(135deg,var(--sky-700),var(--sky-900));color:var(--w);text-align:center;padding:4rem 0}
+        .cta h2{font-size:1.75rem;font-weight:700;margin-bottom:.75rem}
+        .cta p{color:var(--sky-200);margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto}
+        .cta .btn-white{display:inline-block;padding:.65rem 1.5rem;background:var(--w);color:var(--sky-700);border-radius:8px;font-size:.875rem;font-weight:600;transition:all .2s}
+        .cta .btn-white:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+        footer{background:var(--sl900);color:var(--sl300);text-align:center;padding:2rem 0;font-size:.8125rem}
+        footer a{color:var(--sky-400)}footer a:hover{text-decoration:underline}
+        .caret{display:inline-block;width:3px;height:1em;margin-left:.08em;background:currentColor;vertical-align:text-bottom;animation:blink 1s step-end infinite}
+        @keyframes blink{50%{opacity:0}}
+        @media(prefers-reduced-motion:reduce){.caret{animation:none}}
+        @media(max-width:768px){
+            .nav-links{display:none}.nav-toggle{display:block}
+            .nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--w);border-bottom:1px solid var(--sl200);padding:1rem 1.5rem;gap:1rem}
+            .hero{padding:6rem 0 3rem}.hero h1{font-size:2rem}.hero p{font-size:1rem}
+            .about-grid{grid-template-columns:1fr;text-align:center}
+            .about-photo{margin:0 auto;width:160px;height:160px}
+            .card-grid{grid-template-columns:1fr}
+        }
+    </style>
 </head>
-
-<body id="top">
-
-  <!-- 
-    - #HEADER
-  -->
-
-  <header class="header" data-header>
-    <div class="container">
-
-      <a href="#" class="logo">
-        <img src="./assets/images/favicon.ico" width="88" height="25" alt="Eric logo">
-      </a>
-
-      <nav class="navbar" data-navbar>
-
-        <div class="navbar-top">
-          <a href="#" class="logo">
-            <img src="./assets/images/ericlogo03.png" width="90" height="25" alt="Eric logo">
-          </a>
-
-          <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
-            <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
-          </button>
-        </div>
-
-        <ul class="navbar-list">
-
-          <li>
-            <a href="#home" class="navbar-link hover-1" data-nav-toggler>Home</a>
-          </li>
-
-          <li>
-            <a href="#topics" class="navbar-link hover-1" data-nav-toggler>Projects</a>
-          </li>
-
-          <li>
-            <a href="#featured" class="navbar-link hover-1" data-nav-toggler>Links</a>
-          </li>
-
-          <li>
-            <a href="#recent" class="navbar-link hover-1" data-nav-toggler>Resources</a>
-          </li>
-
-          <li>
-            <a href="#" class="navbar-link hover-1" data-nav-toggler>Contact</a>
-          </li>
-
-        </ul>
-
-        <div class="navbar-bottom">
-
-          
-          <ul class="link-list">
-
-            <li>
-              <a href="#" class="navbar-bottom-link hover-1">Profile</a>
-            </li>
-
-            <li>
-              <a href="#" class="navbar-bottom-link hover-1">Articles Saved</a>
-            </li>
-
-            <li>
-              <a href="#" class="navbar-bottom-link hover-1">Add New Post</a>
-            </li>
-
-            <li>
-              <a href="#" class="navbar-bottom-link hover-1">My Likes</a>
-            </li>
-
-            <li>
-              <a href="#" class="navbar-bottom-link hover-1">Account Setting</a>
-            </li>
-
-            <li>
-              <a href="#" class="navbar-bottom-link hover-1">Sign Out</a>
-            </li>
-
-          </ul>
-
-        </div>
-
-        <p class="copyright-text">
-          Copyright 2024 © Eric - Personal Blog Template.
-          
-        </p>
-
-      </nav>
-
-      
-
-      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
-        <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
-      </button>
-
-    </div>
-  </header>
-
-
-
-
-
-  <main>
-    <article>
-
-      <!-- 
-        - #HERO
-      -->
-
-      <section class="hero" id="home" aria-label="home">
-        <div class="container">
-
-          <div class="hero-content">
-
-            <p class="hero-subtitle">Welcome to my GitHub HTML Site</p>
-
-            <h1 class="headline headline-1 section-title">
-              I’m <span class="span">Eric Frayer</span>
-            </h1>
-
-            <p class="hero-text">
-              I am a Business Intelligence, Data and Analytics professional with a passion for data and technology.
-              
-              
-            </p>
-
-            
-          </div>
-
-          <div class="hero-banner">
-
-            <img src="./assets/images/hero-banner.png" width="327" height="490" alt="Eric Frayer" class="w-100">
-
-            <img src="./assets/images/pattern-2.svg" width="27" height="26" alt="shape" class="shape shape-1">
-
-            <img src="./assets/images/pattern-3.svg" width="27" height="26" alt="shape" class="shape shape-2">
-
-          </div>
-
-          <img src="./assets/images/shadow-1.svg" width="500" height="800" alt="" class="hero-bg hero-bg-1">
-
-          <img src="./assets/images/shadow-2.svg" width="500" height="500" alt="" class="hero-bg hero-bg-2">
-
-        </div>
-      </section>
-
-
-
-
-
-      <!-- 
-        - #TOPICS
-      -->
-
-      <section class="topics" id="topics" aria-labelledby="topic-label">
-        <div class="container">
-
-          <div class="card topic-card">
-
-            <div class="card-content">
-
-              <h2 class="headline headline-2 section-title card-title" id="topic-label">
-                Projects
-              </h2>
-
-              <p class="card-text">
-                Don't miss out on the latest news about AI, Business Intelligence, Data and Analytics ...
-              </p>
-
-              <div class="btn-group">
-                <button class="btn-icon" aria-label="previous" data-slider-prev>
-                  <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
-                </button>
-
-                <button class="btn-icon" aria-label="next" data-slider-next>
-                  <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-                </button>
-              </div>
-
-            </div>
-
-            <div class="slider" data-slider>
-              <ul class="slider-list" data-slider-container>
-
-                <li class="slider-item">
-                  <a href="#" class="slider-card">
-
-                    <figure class="slider-banner img-holder" style="--width: 507; --height: 618;">
-                      <img src="./assets/images/topic-1.png" width="507" height="618" loading="lazy" alt="Sport"
-                        class="img-cover">
-                    </figure>
-
-                    <div class="slider-content">
-                      <span class="slider-title">Databricks</span>
-
-                      <p class="slider-subtitle">38 Articles</p>
-                    </div>
-
-                  </a>
-                </li>
-
-                <li class="slider-item">
-                  <a href="#" class="slider-card">
-
-                    <figure class="slider-banner img-holder" style="--width: 507; --height: 618;">
-                      <img src="./assets/images/topic-2.png" width="507" height="618" loading="lazy" alt="Travel"
-                        class="img-cover">
-                    </figure>
-
-                    <div class="slider-content">
-                      <span class="slider-title">Python</span>
-
-                      <p class="slider-subtitle">63 Articles</p>
-                    </div>
-
-                  </a>
-                </li>
-
-                <li class="slider-item">
-                  <a href="#" class="slider-card">
-
-                    <figure class="slider-banner img-holder" style="--width: 507; --height: 618;">
-                      <img src="./assets/images/topic-3.png" width="507" height="618" loading="lazy" alt="Design"
-                        class="img-cover">
-                    </figure>
-
-                    <div class="slider-content">
-                      <span class="slider-title">R Development</span>
-
-                      <p class="slider-subtitle">78 Articles</p>
-                    </div>
-
-                  </a>
-                </li>
-
-                <li class="slider-item">
-                  <a href="#" class="slider-card">
-
-                    <figure class="slider-banner img-holder" style="--width: 507; --height: 618;">
-                      <img src="./assets/images/topic-4.png" width="507" height="618" loading="lazy" alt="Movie"
-                        class="img-cover">
-                    </figure>
-
-                    <div class="slider-content">
-                      <span class="slider-title">DAX</span>
-
-                      <p class="slider-subtitle">125 Articles</p>
-                    </div>
-
-                  </a>
-                </li>
-
-                <li class="slider-item">
-                  <a href="#" class="slider-card">
-
-                    <figure class="slider-banner img-holder" style="--width: 507; --height: 618;">
-                      <img src="./assets/images/topic-5.png" width="507" height="618" loading="lazy" alt="Lifestyle"
-                        class="img-cover">
-                    </figure>
-
-                    <div class="slider-content">
-                      <span class="slider-title">SQL</span>
-
-                      <p class="slider-subtitle">78 Articles</p>
-                    </div>
-
-                  </a>
-                </li>
-
-              </ul>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-
-
-
-
-      <!-- 
-        - #FEATURED POST
-      -->
-
-      <section class="section feature" aria-label="feature" id="featured">
-        <div class="container">
-
-          <h2 class="headline headline-2 section-title">
-            <span class="span">Editor's picked</span>
-          </h2>
-
-          <p class="section-text">
-            Featured and highly rated articles
-          </p>
-
-          <ul class="feature-list">
-
-            <li>
-              <div class="card feature-card">
-
-                <figure class="card-banner img-holder" style="--width: 1602; --height: 903;">
-                  <img src="./assets/images/featured-1.png" width="1602" height="903" loading="lazy"
-                    alt="Self-observation is the first step of inner unfolding" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <div class="card-wrapper">
-                    <div class="card-tag">
-                      <a href="#" class="span hover-2">#Travel</a>
-
-                      <a href="#" class="span hover-2">#Lifestyle</a>
-                    </div>
-
-                    <div class="wrapper">
-                      <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                      <span class="span">3 mins read</span>
-                    </div>
-                  </div>
-
-                  <h3 class="headline headline-3">
-                    <a href="#" class="card-title hover-2">
-                      Self-observation is the first step of inner unfolding
-                    </a>
-                  </h3>
-
-                  <div class="card-wrapper">
-
-                    <div class="profile-card">
-                      <img src="./assets/images/author-1.png" width="48" height="48" loading="lazy" alt="Joseph"
-                        class="profile-banner">
-
-                      <div>
-                        <p class="card-title">Joseph</p>
-
-                        <p class="card-subtitle">25 Nov 2022</p>
-                      </div>
-                    </div>
-
-                    <a href="#" class="card-btn">Read more</a>
-
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="card feature-card">
-
-                <figure class="card-banner img-holder" style="--width: 1602; --height: 903;">
-                  <img src="./assets/images/featured-2.png" width="1602" height="903" loading="lazy"
-                    alt="Self-observation is the first step of inner unfolding" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <div class="card-wrapper">
-                    <div class="card-tag">
-                      <a href="#" class="span hover-2">#Design</a>
-
-                      <a href="#" class="span hover-2">#Movie</a>
-                    </div>
-
-                    <div class="wrapper">
-                      <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                      <span class="span">6 mins read</span>
-                    </div>
-                  </div>
-
-                  <h3 class="headline headline-3">
-                    <a href="#" class="card-title hover-2">
-                      Self-observation is the first step of inner unfolding
-                    </a>
-                  </h3>
-
-                  <div class="card-wrapper">
-
-                    <div class="profile-card">
-                      <img src="./assets/images/author-1.png" width="48" height="48" loading="lazy" alt="Joseph"
-                        class="profile-banner">
-
-                      <div>
-                        <p class="card-title">Joseph</p>
-
-                        <p class="card-subtitle">25 Nov 2022</p>
-                      </div>
-                    </div>
-
-                    <a href="#" class="card-btn">Read more</a>
-
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="card feature-card">
-
-                <figure class="card-banner img-holder" style="--width: 1602; --height: 903;">
-                  <img src="./assets/images/featured-3.png" width="1602" height="903" loading="lazy"
-                    alt="Self-observation is the first step of inner unfolding" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <div class="card-wrapper">
-                    <div class="card-tag">
-                      <a href="#" class="span hover-2">#Design</a>
-
-                      <a href="#" class="span hover-2">#Movie</a>
-                    </div>
-
-                    <div class="wrapper">
-                      <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                      <span class="span">6 mins read</span>
-                    </div>
-                  </div>
-
-                  <h3 class="headline headline-3">
-                    <a href="#" class="card-title hover-2">
-                      Self-observation is the first step of inner unfolding
-                    </a>
-                  </h3>
-
-                  <div class="card-wrapper">
-
-                    <div class="profile-card">
-                      <img src="./assets/images/author-1.png" width="48" height="48" loading="lazy" alt="Joseph"
-                        class="profile-banner">
-
-                      <div>
-                        <p class="card-title">Joseph</p>
-
-                        <p class="card-subtitle">25 Nov 2022</p>
-                      </div>
-                    </div>
-
-                    <a href="#" class="card-btn">Read more</a>
-
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="card feature-card">
-
-                <figure class="card-banner img-holder" style="--width: 1602; --height: 903;">
-                  <img src="./assets/images/featured-4.png" width="1602" height="903" loading="lazy"
-                    alt="Self-observation is the first step of inner unfolding" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <div class="card-wrapper">
-                    <div class="card-tag">
-                      <a href="#" class="span hover-2">#Design</a>
-
-                      <a href="#" class="span hover-2">#Movie</a>
-                    </div>
-
-                    <div class="wrapper">
-                      <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                      <span class="span">6 mins read</span>
-                    </div>
-                  </div>
-
-                  <h3 class="headline headline-3">
-                    <a href="#" class="card-title hover-2">
-                      Self-observation is the first step of inner unfolding
-                    </a>
-                  </h3>
-
-                  <div class="card-wrapper">
-
-                    <div class="profile-card">
-                      <img src="./assets/images/author-1.png" width="48" height="48" loading="lazy" alt="Joseph"
-                        class="profile-banner">
-
-                      <div>
-                        <p class="card-title">Joseph</p>
-
-                        <p class="card-subtitle">25 Nov 2022</p>
-                      </div>
-                    </div>
-
-                    <a href="#" class="card-btn">Read more</a>
-
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="card feature-card">
-
-                <figure class="card-banner img-holder" style="--width: 1602; --height: 903;">
-                  <img src="./assets/images/featured-5.png" width="1602" height="903" loading="lazy"
-                    alt="Self-observation is the first step of inner unfolding" class="img-cover">
-                </figure>
-
-                <div class="card-content">
-
-                  <div class="card-wrapper">
-                    <div class="card-tag">
-                      <a href="#" class="span hover-2">#Design</a>
-
-                      <a href="#" class="span hover-2">#Movie</a>
-                    </div>
-
-                    <div class="wrapper">
-                      <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                      <span class="span">6 mins read</span>
-                    </div>
-                  </div>
-
-                  <h3 class="headline headline-3">
-                    <a href="#" class="card-title hover-2">
-                      Self-observation is the first step of inner unfolding
-                    </a>
-                  </h3>
-
-                  <div class="card-wrapper">
-
-                    <div class="profile-card">
-                      <img src="./assets/images/author-1.png" width="48" height="48" loading="lazy" alt="Joseph"
-                        class="profile-banner">
-
-                      <div>
-                        <p class="card-title">Joseph</p>
-
-                        <p class="card-subtitle">25 Nov 2022</p>
-                      </div>
-                    </div>
-
-                    <a href="#" class="card-btn">Read more</a>
-
-                  </div>
-
-                </div>
-
-              </div>
-            </li>
-
-          </ul>
-
-          <a href="#" class="btn btn-secondary">
-            <span class="span">Show More Posts</span>
-
-            <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-          </a>
-
-        </div>
-
-        <img src="./assets/images/shadow-3.svg" width="500" height="1500" loading="lazy" alt="" class="feature-bg">
-
-      </section>
-
-
-
-
-
-      <!-- 
-        - #POPULAR TAGS
-      -->
-
-      <section class="tags" aria-labelledby="tag-label">
-        <div class="container">
-
-          <h2 class="headline headline-2 section-title" id="tag-label">
-            <span class="span">Popular Tags</span>
-          </h2>
-
-          <p class="section-text">
-            Most searched keywords
-          </p>
-
-          <ul class="grid-list">
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag1.png" width="32" height="32" loading="lazy" alt="Travel">
-
-                <p class="btn-text">Travel</p>
-              </button>
-            </li>
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag2.png" width="32" height="32" loading="lazy" alt="Culture">
-
-                <p class="btn-text">Culture</p>
-              </button>
-            </li>
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag3.png" width="32" height="32" loading="lazy" alt="Lifestyle">
-
-                <p class="btn-text">Lifestyle</p>
-              </button>
-            </li>
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag4.png" width="32" height="32" loading="lazy" alt="Fashion">
-
-                <p class="btn-text">Fashion</p>
-              </button>
-            </li>
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag5.png" width="32" height="32" loading="lazy" alt="Food">
-
-                <p class="btn-text">Food</p>
-              </button>
-            </li>
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag6.png" width="32" height="32" loading="lazy" alt="Space">
-
-                <p class="btn-text">Space</p>
-              </button>
-            </li>
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag7.png" width="32" height="32" loading="lazy" alt="Animal">
-
-                <p class="btn-text">Animal</p>
-              </button>
-            </li>
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag8.png" width="32" height="32" loading="lazy" alt="Minimal">
-
-                <p class="btn-text">Minimal</p>
-              </button>
-            </li>
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag9.png" width="32" height="32" loading="lazy" alt="Interior">
-
-                <p class="btn-text">Interior</p>
-              </button>
-            </li>
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag10.png" width="32" height="32" loading="lazy" alt="Plant">
-
-                <p class="btn-text">Plant</p>
-              </button>
-            </li>
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag11.png" width="32" height="32" loading="lazy" alt="Nature">
-
-                <p class="btn-text">Nature</p>
-              </button>
-            </li>
-
-            <li>
-              <button class="card tag-btn">
-                <img src="./assets/images/tag12.png" width="32" height="32" loading="lazy" alt="Business">
-
-                <p class="btn-text">Business</p>
-              </button>
-            </li>
-
-          </ul>
-
-        </div>
-      </section>
-
-
-
-
-
-      <!-- 
-        - #RECENT POST
-      -->
-
-      <section class="section recent-post" id="recent" aria-labelledby="recent-label">
-        <div class="container">
-
-          <div class="post-main">
-
-            <h2 class="headline headline-2 section-title">
-              <span class="span">Recent posts</span>
-            </h2>
-
-            <p class="section-text">
-              Don't miss the latest trends
-            </p>
-
-            <ul class="grid-list">
-
-              <li>
-                <div class="recent-post-card">
-
-                  <figure class="card-banner img-holder" style="--width: 271; --height: 258;">
-                    <img src="./assets/images/recent-post-1.jpg" width="271" height="258" loading="lazy"
-                      alt="Helpful Tips for Working from Home as a Freelancer" class="img-cover">
-                  </figure>
-
-                  <div class="card-content">
-
-                    <a href="#" class="card-badge">Working Tips</a>
-
-                    <h3 class="headline headline-3 card-title">
-                      <a href="#" class="link hover-2">Helpful Tips for Working from Home as a Freelancer</a>
-                    </h3>
-
-                    <p class="card-text">
-                      Gosh jaguar ostrich quail one excited dear hello and bound and the and bland moral misheard
-                      roadrunner flapped lynx far that and jeepers giggled far and far
-                    </p>
-
-                    <div class="card-wrapper">
-                      <div class="card-tag">
-                        <a href="#" class="span hover-2"># Travel</a>
-
-                        <a href="#" class="span hover-2"># Lifestyle</a>
-                      </div>
-
-                      <div class="wrapper">
-                        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                        <span class="span">3 mins read</span>
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div>
-              </li>
-
-              <li>
-                <div class="recent-post-card">
-
-                  <figure class="card-banner img-holder" style="--width: 271; --height: 258;">
-                    <img src="./assets/images/recent-post-2.jpg" width="271" height="258" loading="lazy"
-                      alt="Helpful Tips for Working from Home as a Freelancer" class="img-cover">
-                  </figure>
-
-                  <div class="card-content">
-
-                    <a href="#" class="card-badge">Working Tips</a>
-
-                    <h3 class="headline headline-3 card-title">
-                      <a href="#" class="link hover-2">Helpful Tips for Working from Home as a Freelancer</a>
-                    </h3>
-
-                    <p class="card-text">
-                      Gosh jaguar ostrich quail one excited dear hello and bound and the and bland moral misheard
-                      roadrunner flapped lynx far that and jeepers giggled far and far
-                    </p>
-
-                    <div class="card-wrapper">
-                      <div class="card-tag">
-                        <a href="#" class="span hover-2"># Travel</a>
-
-                        <a href="#" class="span hover-2"># Lifestyle</a>
-                      </div>
-
-                      <div class="wrapper">
-                        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                        <span class="span">3 mins read</span>
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div>
-              </li>
-
-              <li>
-                <div class="recent-post-card">
-
-                  <figure class="card-banner img-holder" style="--width: 271; --height: 258;">
-                    <img src="./assets/images/recent-post-3.jpg" width="271" height="258" loading="lazy"
-                      alt="Helpful Tips for Working from Home as a Freelancer" class="img-cover">
-                  </figure>
-
-                  <div class="card-content">
-
-                    <a href="#" class="card-badge">Working Tips</a>
-
-                    <h3 class="headline headline-3 card-title">
-                      <a href="#" class="link hover-2">Helpful Tips for Working from Home as a Freelancer</a>
-                    </h3>
-
-                    <p class="card-text">
-                      Gosh jaguar ostrich quail one excited dear hello and bound and the and bland moral misheard
-                      roadrunner flapped lynx far that and jeepers giggled far and far
-                    </p>
-
-                    <div class="card-wrapper">
-                      <div class="card-tag">
-                        <a href="#" class="span hover-2"># Travel</a>
-
-                        <a href="#" class="span hover-2"># Lifestyle</a>
-                      </div>
-
-                      <div class="wrapper">
-                        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                        <span class="span">3 mins read</span>
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div>
-              </li>
-
-              <li>
-                <div class="recent-post-card">
-
-                  <figure class="card-banner img-holder" style="--width: 271; --height: 258;">
-                    <img src="./assets/images/recent-post-4.jpg" width="271" height="258" loading="lazy"
-                      alt="Helpful Tips for Working from Home as a Freelancer" class="img-cover">
-                  </figure>
-
-                  <div class="card-content">
-
-                    <a href="#" class="card-badge">Working Tips</a>
-
-                    <h3 class="headline headline-3 card-title">
-                      <a href="#" class="link hover-2">Helpful Tips for Working from Home as a Freelancer</a>
-                    </h3>
-
-                    <p class="card-text">
-                      Gosh jaguar ostrich quail one excited dear hello and bound and the and bland moral misheard
-                      roadrunner flapped lynx far that and jeepers giggled far and far
-                    </p>
-
-                    <div class="card-wrapper">
-                      <div class="card-tag">
-                        <a href="#" class="span hover-2"># Travel</a>
-
-                        <a href="#" class="span hover-2"># Lifestyle</a>
-                      </div>
-
-                      <div class="wrapper">
-                        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                        <span class="span">3 mins read</span>
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div>
-              </li>
-
-              <li>
-                <div class="recent-post-card">
-
-                  <figure class="card-banner img-holder" style="--width: 271; --height: 258;">
-                    <img src="./assets/images/recent-post-5.jpg" width="271" height="258" loading="lazy"
-                      alt="Helpful Tips for Working from Home as a Freelancer" class="img-cover">
-                  </figure>
-
-                  <div class="card-content">
-
-                    <a href="#" class="card-badge">Working Tips</a>
-
-                    <h3 class="headline headline-3 card-title">
-                      <a href="#" class="link hover-2">Helpful Tips for Working from Home as a Freelancer</a>
-                    </h3>
-
-                    <p class="card-text">
-                      Gosh jaguar ostrich quail one excited dear hello and bound and the and bland moral misheard
-                      roadrunner flapped lynx far that and jeepers giggled far and far
-                    </p>
-
-                    <div class="card-wrapper">
-                      <div class="card-tag">
-                        <a href="#" class="span hover-2"># Travel</a>
-
-                        <a href="#" class="span hover-2"># Lifestyle</a>
-                      </div>
-
-                      <div class="wrapper">
-                        <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
-
-                        <span class="span">3 mins read</span>
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div>
-              </li>
-
+<body>
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#home" class="nav-brand">Eric Frayer</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-
-            <nav aria-label="pagination" class="pagination">
-
-              <a href="#" class="pagination-btn" aria-label="previous page">
-                <ion-icon name="arrow-back" aria-hidden="true"></ion-icon>
-              </a>
-
-              <a href="#" class="pagination-btn">1</a>
-              <a href="#" class="pagination-btn">2</a>
-              <a href="#" class="pagination-btn">3</a>
-              <a href="#" class="pagination-btn" aria-label="more page">...</a>
-
-              <a href="#" class="pagination-btn" aria-label="next page">
-                <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-              </a>
-
-            </nav>
-
-          </div>
-
-          <div class="post-aside grid-list">
-
-            <div class="card aside-card">
-
-              <h3 class="headline headline-2 aside-title">
-                <span class="span">Popular Posts</span>
-              </h3>
-
-              <ul class="popular-list">
-
-                <li>
-                  <div class="popular-card">
-
-                    <figure class="card-banner img-holder" style="--width: 64; --height: 64;">
-                      <img src="./assets/images/popular-post-1.jpg" width="64" height="64" loading="lazy"
-                        alt="Creating is a privilege but it’s also a gift" class="img-cover">
-                    </figure>
-
-                    <div class="card-content">
-
-                      <h4 class="headline headline-4 card-title">
-                        <a href="#" class="link hover-2">Creating is a privilege but it’s also a gift</a>
-                      </h4>
-
-                      <div class="warpper">
-                        <p class="card-subtitle">15 mins read</p>
-
-                        <time class="publish-date" datetime="2022-04-15">15 April 2022</time>
-                      </div>
-
-                    </div>
-
-                  </div>
-                </li>
-
-                <li>
-                  <div class="popular-card">
-
-                    <figure class="card-banner img-holder" style="--width: 64; --height: 64;">
-                      <img src="./assets/images/popular-post-2.jpg" width="64" height="64" loading="lazy"
-                        alt="Being unique is better than being perfect" class="img-cover">
-                    </figure>
-
-                    <div class="card-content">
-
-                      <h4 class="headline headline-4 card-title">
-                        <a href="#" class="link hover-2">Being unique is better than being perfect</a>
-                      </h4>
-
-                      <div class="warpper">
-                        <p class="card-subtitle">15 mins read</p>
-
-                        <time class="publish-date" datetime="2022-04-15">15 April 2022</time>
-                      </div>
-
-                    </div>
-
-                  </div>
-                </li>
-
-                <li>
-                  <div class="popular-card">
-
-                    <figure class="card-banner img-holder" style="--width: 64; --height: 64;">
-                      <img src="./assets/images/popular-post-3.jpg" width="64" height="64" loading="lazy"
-                        alt="Every day, in every city and town across the country" class="img-cover">
-                    </figure>
-
-                    <div class="card-content">
-
-                      <h4 class="headline headline-4 card-title">
-                        <a href="#" class="link hover-2">Every day, in every city and town across the country</a>
-                      </h4>
-
-                      <div class="warpper">
-                        <p class="card-subtitle">15 mins read</p>
-
-                        <time class="publish-date" datetime="2022-04-15">15 April 2022</time>
-                      </div>
-
-                    </div>
-
-                  </div>
-                </li>
-
-                <li>
-                  <div class="popular-card">
-
-                    <figure class="card-banner img-holder" style="--width: 64; --height: 64;">
-                      <img src="./assets/images/popular-post-4.jpg" width="64" height="64" loading="lazy"
-                        alt="Your voice, your mind, your story, your vision" class="img-cover">
-                    </figure>
-
-                    <div class="card-content">
-
-                      <h4 class="headline headline-4 card-title">
-                        <a href="#" class="link hover-2">Your voice, your mind, your story, your vision</a>
-                      </h4>
-
-                      <div class="warpper">
-                        <p class="card-subtitle">15 mins read</p>
-
-                        <time class="publish-date" datetime="2022-04-15">15 April 2022</time>
-                      </div>
-
-                    </div>
-
-                  </div>
-                </li>
-
-                <li>
-                  <div class="popular-card">
-
-                    <figure class="card-banner img-holder" style="--width: 64; --height: 64;">
-                      <img src="./assets/images/popular-post-2.jpg" width="64" height="64" loading="lazy"
-                        alt="Being unique is better than being perfect" class="img-cover">
-                    </figure>
-
-                    <div class="card-content">
-
-                      <h4 class="headline headline-4 card-title">
-                        <a href="#" class="link hover-2">Being unique is better than being perfect</a>
-                      </h4>
-
-                      <div class="warpper">
-                        <p class="card-subtitle">15 mins read</p>
-
-                        <time class="publish-date" datetime="2022-04-15">15 April 2022</time>
-                      </div>
-
-                    </div>
-
-                  </div>
-                </li>
-
-              </ul>
-
-            </div>
-
-            <div class="card aside-card">
-
-              <h3 class="headline headline-2 aside-title">
-                <span class="span">Last Comment</span>
-              </h3>
-
-              <ul class="comment-list">
-
-                <li>
-                  <div class="comment-card">
-
-                    <blockquote class="card-text">
-                      “ Gosh jaguar ostrich quail one excited dear hello and bound and the and bland moral misheard
-                      roadrunner “
-                    </blockquote>
-
-                    <div class="profile-card">
-                      <figure class="profile-banner img-holder">
-                        <img src="./assets/images/author-6.png" width="32" height="32" loading="lazy" alt="Jane Cooper">
-                      </figure>
-
-                      <div>
-                        <p class="card-title">Jane Cooper</p>
-
-                        <time class="card-date" datetime="2022-04-15">15 April 2022</time>
-                      </div>
-                    </div>
-
-                  </div>
-                </li>
-
-                <li>
-                  <div class="comment-card">
-
-                    <blockquote class="card-text">
-                      “ Gosh jaguar ostrich quail one excited dear hello and bound and the and bland moral misheard
-                      roadrunner “
-                    </blockquote>
-
-                    <div class="profile-card">
-                      <figure class="profile-banner img-holder">
-                        <img src="./assets/images/author-7.png" width="32" height="32" loading="lazy" alt="Katen Doe">
-                      </figure>
-
-                      <div>
-                        <p class="card-title">Katen Doe</p>
-
-                        <time class="card-date" datetime="2022-04-15">15 April 2022</time>
-                      </div>
-                    </div>
-
-                  </div>
-                </li>
-
-                <li>
-                  <div class="comment-card">
-
-                    <blockquote class="card-text">
-                      “ Gosh jaguar ostrich quail one excited dear hello and bound and the and bland moral misheard
-                      roadrunner “
-                    </blockquote>
-
-                    <div class="profile-card">
-                      <figure class="profile-banner img-holder">
-                        <img src="./assets/images/author-8.png" width="32" height="32" loading="lazy"
-                          alt="Barbara Cartland">
-                      </figure>
-
-                      <div>
-                        <p class="card-title">Barbara Cartland</p>
-
-                        <time class="card-date" datetime="2022-04-15">15 April 2022</time>
-                      </div>
-                    </div>
-
-                  </div>
-                </li>
-
-              </ul>
-
-            </div>
-
-            <div class="card aside-card insta-card">
-
-              <a href="#" class="logo">
-                <img src="./assets/images/logo.svg" width="119" height="37" loading="lazy" alt="Wren logo">
-              </a>
-
-              <p class="card-text">
-                Follow us on instagram
-              </p>
-
-              <ul class="insta-list">
-
-                <li>
-                  <a href="#" class="insta-post img-holder" style="--width: 276; --height: 277;">
-                    <img src="./assets/images/insta-post-1.png" width="276" height="277" loading="lazy" alt="insta post"
-                      class="img-cover">
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" class="insta-post img-holder" style="--width: 276; --height: 277;">
-                    <img src="./assets/images/insta-post-2.png" width="276" height="277" loading="lazy" alt="insta post"
-                      class="img-cover">
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" class="insta-post img-holder" style="--width: 276; --height: 277;">
-                    <img src="./assets/images/insta-post-3.png" width="276" height="277" loading="lazy" alt="insta post"
-                      class="img-cover">
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" class="insta-post img-holder" style="--width: 276; --height: 277;">
-                    <img src="./assets/images/insta-post-4.png" width="276" height="277" loading="lazy" alt="insta post"
-                      class="img-cover">
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" class="insta-post img-holder" style="--width: 276; --height: 277;">
-                    <img src="./assets/images/insta-post-5.png" width="276" height="277" loading="lazy" alt="insta post"
-                      class="img-cover">
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" class="insta-post img-holder" style="--width: 276; --height: 277;">
-                    <img src="./assets/images/insta-post-6.png" width="276" height="277" loading="lazy" alt="insta post"
-                      class="img-cover">
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" class="insta-post img-holder" style="--width: 276; --height: 277;">
-                    <img src="./assets/images/insta-post-7.png" width="276" height="277" loading="lazy" alt="insta post"
-                      class="img-cover">
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" class="insta-post img-holder" style="--width: 276; --height: 277;">
-                    <img src="./assets/images/insta-post-8.png" width="276" height="277" loading="lazy" alt="insta post"
-                      class="img-cover">
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#" class="insta-post img-holder" style="--width: 276; --height: 277;">
-                    <img src="./assets/images/insta-post-9.png" width="276" height="277" loading="lazy" alt="insta post"
-                      class="img-cover">
-                  </a>
-                </li>
-
-              </ul>
-
-            </div>
-
-          </div>
-
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
-      </section>
+    </nav>
 
-    </article>
-  </main>
-
-
-
-
-
-  <!-- 
-    - #FOOTER
-  -->
-
-  <footer>
-    <div class="container">
-
-      <div class="card footer">
-
-        <div class="section footer-top">
-
-          <div class="footer-brand">
-
-            <a href="#" class="logo">
-              <img src="./assets/images/favicon.ico" width="119" height="37" loading="lazy" alt="Eric logo">
-            </a>
-
-            <p class="footer-text">
-              Eric Frayer GitHub projects and technical resources.
-            </p>
-
-            <p class="footer-list-title">Address</p>
-
-            <address class="footer-text address">
-              7620 Loannes Ct. <br>
-              Cincinnati, OH 45243
-            </address>
-
-          </div>
-
-          <div class="footer-list">
-
-            <p class="footer-list-title">Projects</p>
-
-            <ul>
-
-              <li>
-                <a href="#" class="footer-link hover-2">Action</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link hover-2">Business</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link hover-2">Adventure</a>
-              </li>
-
-              <li>
-                <a href="#" class="footer-link hover-2">Canada</a>
-              </li>
-
-              
-            </ul>
-
-          </div>
-
-          <div class="footer-list">
-
-            <p class="footer-list-title">Newsletter</p>
-
-            <p class="footer-text">
-              Sign up to be first to receive the latest stories inspiring us, case studies, and industry news.
-            </p>
-
-            <div class="input-wrapper">
-              <input type="text" name="name" placeholder="Your name" required class="input-field" autocomplete="off">
-
-              <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Eric Frayer</h1>
+            <h1 class="typed"><span id="typed" data-phrases='["Business Intelligence.", "Data &amp; Analytics.", "Practical AI."]'></span><span class="caret"></span></h1>
+            <p>A Business Intelligence, Data and Analytics professional with a passion for data and technology.</p>
+            <div class="hero-links">
+                <a href="https://www.thinkdataanalysis.com" class="btn btn-primary">Think Data Analysis</a>
+                <a href="https://www.thinkdashboards.com" class="btn btn-primary">Think Dashboards</a>
+                <a href="https://medium.com/@ericfrayer" class="btn btn-outline" target="_blank" rel="noopener">Medium Blog</a>
             </div>
+        </div>
+    </section>
 
-            <div class="input-wrapper">
-              <input type="email" name="email_address" placeholder="Emaill address" required class="input-field"
-                autocomplete="off">
-
-              <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <p>Projects, code and resources from my work in data, BI and AI.</p>
             </div>
-
-            <a href="#" class="btn btn-primary">
-              <span class="span">Subscribe</span>
-
-              <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-            </a>
-
-          </div>
-
+            <div class="about-grid">
+                <img src="eric.png" alt="Eric Frayer" class="about-photo">
+                <div class="about-text">
+                    <h3>Hi, I'm Eric Frayer</h3>
+                    <p>This GitHub site is home base for my code and technical projects. <a href="https://www.thinkdataanalysis.com">Think Data Analysis</a> covers data visualization and analytics, and <a href="https://www.thinkdashboards.com">Think Dashboards</a> focuses on AI chat solutions and conversational interfaces.</p>
+                    <p>My work spans Databricks, Python, R, SQL and DAX, with dashboards in Power BI, Qlik and Tableau, and AI applications built on Azure and Node.js.</p>
+                    <p>For more background, visit <a href="https://www.ericfrayer.com" target="_blank" rel="noopener">EricFrayer.com</a>, read my <a href="https://medium.com/@ericfrayer" target="_blank" rel="noopener">technical posts on Medium</a>, or review my <a href="https://www.thinkdataanalysis.com/Eric_Frayer_Resume_2025_c.pdf" target="_blank" rel="noopener">resume</a>.</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="footer-bottom">
-
-          <p class="copyright">
-            &copy; <a href="#" class="copyright-link">ThinkDataAnalysis.com </a>
-          </p>
-
-          <ul class="social-list">
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-twitter"></ion-icon>
-
-                <span class="span">Twitter</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-linkedin"></ion-icon>
-
-                <span class="span">LinkedIn</span>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-instagram"></ion-icon>
-
-                <span class="span">Instagram</span>
-              </a>
-            </li>
-
-          </ul>
-
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>Projects</h2>
+                <p>Working demonstrations across analytics, dashboards and AI.</p>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"/></svg></div>
+                    <h3>Think Data Analysis</h3>
+                    <p>A technical sandbox and portfolio for web applications, data visualization, and explorations in AI/ML.</p>
+                    <a href="https://www.thinkdataanalysis.com" class="card-link">Visit Site &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"/></svg></div>
+                    <h3>Think Dashboards</h3>
+                    <p>Interactive chatbots, RAG systems, and AI-powered tools built for learning, demonstration, and real-world use.</p>
+                    <a href="https://www.thinkdashboards.com" class="card-link">Visit Site &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z"/></svg></div>
+                    <h3>How People Use ChatGPT</h3>
+                    <p>An interactive look at how people actually use ChatGPT.</p>
+                    <a href="https://www.thinkdataanalysis.com/how_people_use_chatgpt/" class="card-link">Explore &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg></div>
+                    <h3>My Approach to Learning AI</h3>
+                    <p>How I learn and apply AI, from model comparisons to building real tools.</p>
+                    <a href="https://www.thinkdashboards.com/learn-ai/" class="card-link">Read More &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0 0 12 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 0 1-2.031.352 5.988 5.988 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971Zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0 2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 0 1-2.031.352 5.989 5.989 0 0 1-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971Z"/></svg></div>
+                    <h3>PMI AI Ethics</h3>
+                    <p>Notes and resources on the ethical use of AI.</p>
+                    <a href="https://www.thinkdataanalysis.com/pmi-ai-ethics" class="card-link">Read More &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg></div>
+                    <h3>Medium Blog</h3>
+                    <p>Technical deep-dives on data, BI and AI, including LLM comparisons across OpenAI, Claude and local models.</p>
+                    <a href="https://medium.com/@ericfrayer" class="card-link" target="_blank" rel="noopener">Read on Medium &rarr;</a>
+                </div>
+            </div>
         </div>
+    </section>
 
-      </div>
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2>Skills &amp; Tools</h2>
+                <p>The toolkit behind the projects.</p>
+            </div>
+            <div class="chips">
+                <span class="chip">Databricks</span>
+                <span class="chip">Python</span>
+                <span class="chip">R</span>
+                <span class="chip">SQL</span>
+                <span class="chip">DAX</span>
+                <span class="chip">Power BI</span>
+                <span class="chip">Qlik</span>
+                <span class="chip">Tableau</span>
+                <span class="chip">Azure</span>
+                <span class="chip">Node.js</span>
+                <span class="chip">OpenAI &amp; Claude</span>
+                <span class="chip">RAG &amp; LangChain</span>
+            </div>
+        </div>
+    </section>
 
-    </div>
-  </footer>
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p>Interested in data, dashboards or AI for your organization or project? Get in touch.</p>
+            <a href="mailto:info@ericfrayer.com" class="btn-white">info@ericfrayer.com</a>
+        </div>
+    </section>
 
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year">2026</span> Eric Frayer &nbsp;|&nbsp; <a href="https://www.thinkdataanalysis.com">Think Data Analysis</a> &nbsp;|&nbsp; <a href="https://www.thinkdashboards.com">Think Dashboards</a></p>
+        </div>
+    </footer>
 
-
-
-
-  <!-- 
-    - #BACK TO TOP
-  -->
-
-  <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
-    <ion-icon name="arrow-up-outline" aria-hidden="true"></ion-icon>
-  </a>
-
-
-
-
-
-  <!-- 
-    - custom js link
-  -->
-  <script src="./assets/js/script.js"></script>
-
-  <!-- 
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+    <script>
+        const navbar=document.getElementById('navbar');
+        window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>10));
+        const toggle=document.getElementById('navToggle');
+        const links=document.getElementById('navLinks');
+        toggle.addEventListener('click',()=>links.classList.toggle('open'));
+        links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+        document.getElementById('year').textContent=new Date().getFullYear();
+        // Hero typewriter, same timing as the sister sites
+        (function(){
+            const el=document.getElementById('typed');
+            const phrases=JSON.parse(el.dataset.phrases);
+            if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=phrases[0];return;}
+            let idx=0,pos=0,deleting=false;
+            function tick(){
+                const phrase=phrases[idx];
+                pos+=deleting?-1:1;
+                el.textContent=phrase.slice(0,pos);
+                let delay=deleting?40:70;
+                if(!deleting&&pos===phrase.length){deleting=true;delay=2000;}
+                else if(deleting&&pos===0){deleting=false;idx=(idx+1)%phrases.length;delay=400;}
+                setTimeout(tick,delay);
+            }
+            setTimeout(tick,400);
+        })();
+    </script>
 </body>
-
 </html>
